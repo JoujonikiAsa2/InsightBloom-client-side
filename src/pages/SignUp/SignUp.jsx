@@ -7,11 +7,17 @@ import { MdAddPhotoAlternate } from "react-icons/md";
 import { MdOutlineMail } from "react-icons/md";
 import { RiGoogleFill, RiLockPasswordLine } from "react-icons/ri";
 import './signUp.css'
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 // SIgnUp form
 const SignUp = () => {
+
+    const { createUser, updateUserProfile } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const {
         register,
@@ -22,10 +28,52 @@ const SignUp = () => {
     // get data on submit the form
     const onSubmit = data => {
         console.log(data)
+        createUser(data.email, data.password)
+            .then(res => {
+                console.log(res)
+                updateUserProfile(data.name, data.photo)
+                    .then(() => { console.log("Updated") })
+                    .catch(error => console.log(error))
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Signed up successfully"
+                });
+                navigate('/login')
+            })
+            .catch(error => {
+                console.log(error)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "Signed up failed",
+                    text: `${error.message.slice(10,error.message.length-1)}`
+                });
+            })
     };
 
     return (
-        <div className="max-w-[2200px] mx-auto lg:h-[700px] flex flex-col justify-center items-center">
+        <div className="max-w-[2200px] mx-auto lg:h-[700px] flex flex-col justify-center items-center sm:py-12">
             <Helmet>
                 <title>InsightBloom | SignUp</title>
             </Helmet>

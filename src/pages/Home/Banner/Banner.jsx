@@ -3,7 +3,7 @@ import forum from './LottieFiles/forum.json'
 
 const Banner = () => {
     return (
-        <div className="hero bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  max-w-[2200px] h-[80vh]">
+        <div className="hero bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  max-w-[2200px] h-[100vh]">
             <div className="hero-content flex-col lg:flex-row">
                 <Lottie animationData={forum} loop={true}></Lottie>
                 <div className="lg:w-[600px]">
