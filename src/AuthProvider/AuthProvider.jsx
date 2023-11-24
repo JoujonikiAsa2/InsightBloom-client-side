@@ -24,6 +24,10 @@ const AuthProvider = ({children}) => {
             displayName: name, photoURL: photo
         });
     }
+    const signOut = () => {
+        setLoading(true)
+        return signOut(auth)
+    }
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, currentUser=>{
@@ -41,7 +45,8 @@ const AuthProvider = ({children}) => {
         loading,
         createUser,
         login,
-        updateUserProfile
+        updateUserProfile,
+        signOut
     }
 
     return (

@@ -1,16 +1,41 @@
 import { IoMenuOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
 import './navlink.css'
-import { useState } from "react";
 import logo1 from '../../assets/web-logo.png'
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { signOut } from "firebase/auth";
+import auth from "../../firebase/firebase.config";
 
 const Navbar = () => {
 
-    const [user, setUser] = useState(true)
+    const {user} = useAuth()
 
-    const handleCLick = () => {
-        setUser(false)
+
+    // handle the logout button to logout a user
+    const handleLogOut = () => {
+        signOut(auth)
+        .then(()=>{
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Sign Out successfully"
+            });
+        })
+        .then(error=>console.log(error))
     }
+
+
     // navlinks for navbar
     const links =
         <>
@@ -65,7 +90,7 @@ const Navbar = () => {
                         !user ? <ul>
                             <li>
                                 <nav className="sidebar">
-                                    <NavLink to="/joinUs">Join US</NavLink>
+                                    <NavLink to="/joinUs" className="btn bg-indigo-500 text-white">Join US</NavLink>
                                 </nav>
                             </li>
                         </ul> : ""
@@ -89,7 +114,7 @@ const Navbar = () => {
                                     <li className="sidebar">
                                             <Link to="/membership">Dashboard</Link>
                                     </li>
-                                    <li><button onClick={handleCLick}>Logout</button></li>
+                                    <li><button onClick={handleLogOut}>Logout</button></li>
                                 </ul>
                             </div>
                         </>
