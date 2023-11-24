@@ -4,7 +4,7 @@ import Navbar from "../sharedComponents/Navbar/Navbar";
 
 const Main = () => {
     return (
-        <div>
+        <div className="max-w-[2200px] mx-auto inter">
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Footer></Footer>

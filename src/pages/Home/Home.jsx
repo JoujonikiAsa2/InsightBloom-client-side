@@ -1,8 +1,20 @@
+import { Helmet } from "react-helmet";
+import Banner from "./Banner/Banner";
+import Tag from "./Tag/Tag";
+import Announcements from "./Announcements/Announcements";
+
 const Home = () => {
     return (
-        <div>
-            <h2>Home</h2>
-        </div>
+        <>
+            <Helmet>
+                <title>InsightBloom | Home</title>
+            </Helmet>
+            <div>
+                <Banner></Banner>
+                <Tag></Tag>
+                <Announcements></Announcements>
+            </div>
+        </>
     );
 };
 

@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;900&family=Noto+Emoji:wght@400;600;700&family=Righteous&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.emoji{
+    font-family: 'Noto Emoji', sans-serif;
+}
+
+.righteous{
+    font-family: 'Righteous', sans-serif;
+}
+.merriweather{
+    font-family: 'Merriweather', serif;
+}
