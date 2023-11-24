@@ -1,16 +1,22 @@
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import login from './signIn.json'
+import loginPhoto from './signIn.json'
 import { MdOutlineMail } from "react-icons/md";
 import { RiGoogleFill, RiLockPasswordLine } from "react-icons/ri";
 import './login.css'
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 // SIgnUp form
 const Login = () => {
 
+    const {login} = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
+    
     const {
         register,
         handleSubmit,
@@ -20,6 +26,45 @@ const Login = () => {
     // get data on submit the form
     const onSubmit = data => {
         console.log(data)
+        login(data.email, data.password)
+            .then(res => {
+                console.log(res)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Signed in successfully"
+                });
+                navigate(location.state || '/')
+            })
+            .catch(error => {
+                console.log(error)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "Signed in failed",
+                    text: `${error.message.slice(10,error.message.length-1)}`
+                });
+            })
     };
 
     return (
@@ -40,7 +85,7 @@ const Login = () => {
             <div className="shadow">
                 <div className="flex justify-center items-center pb-8 border-t-2 border-lightblue px-8">
                     <div className="">
-                        <Lottie animationData={login} className="h-96"></Lottie>
+                        <Lottie animationData={loginPhoto} className="h-96"></Lottie>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="flex flex-col gap-4">
