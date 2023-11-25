@@ -10,11 +10,16 @@ import './signUp.css'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+const image_API_key = import.meta.env.VITE_IMAGE_API_KEY
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_API_key}`
+
 
 
 // SIgnUp form
 const SignUp = () => {
 
+    const axiosPublic = useAxiosPublic()
     const { createUser, updateUserProfile } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
@@ -26,50 +31,62 @@ const SignUp = () => {
     } = useForm();
 
     // get data on submit the form
-    const onSubmit = data => {
-        console.log(data)
-        createUser(data.email, data.password)
-            .then(res => {
-                console.log(res)
-                updateUserProfile(data.name, data.photo)
-                    .then(() => { console.log("Updated") })
-                    .catch(error => console.log(error))
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                Toast.fire({
-                    icon: "success",
-                    title: "Signed up successfully"
-                });
-                navigate('/login')
-            })
-            .catch(error => {
-                console.log(error)
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                Toast.fire({
-                    icon: "error",
-                    title: "Signed up failed",
-                    text: `${error.message.slice(10,error.message.length-1)}`
-                });
-            })
+    const onSubmit = async (data) => {
+        console.log(data, data.photo[0])
+        const imageFile = { image: data.photo[0]}
+        console.log(imageFile)
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        console.log(res.data)
+        const photo = res.data.data.display_url
+        if (res.data.success) {
+            createUser(data.email, data.password)
+                .then(res => {
+                    console.log(res)
+                    
+                    updateUserProfile(data.name,photo )
+                        .then(() => { console.log("Updated") })
+                        .catch(error => console.log(error))
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: "Signed up successfully"
+                    });
+                    navigate('/login')
+                })
+                .catch(error => {
+                    console.log(error)
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "error",
+                        title: "Signed up failed",
+                        text: `${error.message.slice(10, error.message.length - 1)}`
+                    });
+                })
+        }
     };
 
     return (
@@ -113,9 +130,10 @@ const SignUp = () => {
                                 <div className="flex gap-2 justify-center items-center">
                                     <MdAddPhotoAlternate ></MdAddPhotoAlternate >
                                     <input
+                                        type="file"
                                         placeholder="Enter your photo URL here....."
                                         name="photo"
-                                        {...register("photo", { required: true })} className="input input-bordered w-96" />
+                                        {...register("photo", { required: true })} className="input input-bordered w-96 pt-2" />
                                 </div>
                                 <div className="ml-5 text-white pt-2">
                                     {errors.photo && <span className="text-red-400">This field is required</span>}

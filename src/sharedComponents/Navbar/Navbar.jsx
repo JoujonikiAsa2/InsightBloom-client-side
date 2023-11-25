@@ -12,6 +12,7 @@ const Navbar = () => {
     const {user} = useAuth()
 
 
+    console.log(user.photoURL)
     // handle the logout button to logout a user
     const handleLogOut = () => {
         signOut(auth)
@@ -106,11 +107,11 @@ const Navbar = () => {
                             <div className="dropdown dropdown-end">
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="lg:w-8 w-8 rounded-full">
-                                        <img alt="Tailwind CSS Navbar component" src="https://i.ibb.co/ZJVCL0t/Rectangle-2097-12.png" />
+                                        <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
                                     </div>
                                 </label>
-                                <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52  text-base">
-                                    <li className=" cursor-text ml-3">Name</li>
+                                <ul tabIndex={0} className="mt-3 z-[1] p-2 menu menu-sm dropdown-content bg-base-100 rounded-box w-52  text-base">
+                                    <li className=" cursor-text ml-3 text-blue-600">{user.displayName}</li>
                                     <li className="sidebar">
                                             <Link to="/membership">Dashboard</Link>
                                     </li>
