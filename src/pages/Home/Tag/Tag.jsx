@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 import './style.css';
 
 import SectionTitle from "../../../sharedComponents/SectionTitle/SectionTitle";
@@ -49,7 +50,9 @@ const Tag = () => {
             <SectionTitle heading="Tags" details="You can search post using those tag by clicking on tag."></SectionTitle>
             <Swiper
                 {...swiperParams}
+                modules={[Pagination]}
                 className="mySwiper"
+                data-aos="fade-right" data-aos-anchor-placement="center-center"
             >
 
                 {
