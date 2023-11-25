@@ -1,0 +1,99 @@
+[
+    {
+      "authorImage": "url_to_author_image_2.jpg",
+      "authorName": "Jane Smith",
+      "postTitle": "Optimizing CSS for Performance",
+      "postDescription": "Tips on improving the performance of your CSS code.",
+      "tag": "CSS",
+      "postTime": "2023-11-23T15:45:00Z",
+      "commentButton": "Great insights!",
+      "upVoteIcon": 150,
+      "downVoteIcon": 50,
+      "shareButton": 30
+    },
+    {
+      "authorImage": "url_to_author_image_3.jpg",
+      "authorName": "Alice Johnson",
+      "postTitle": "JavaScript ES6 Features",
+      "postDescription": "Exploring the new features introduced in ECMAScript 2015.",
+      "tag": "JavaScript",
+      "postTime": "2023-11-22T08:15:00Z",
+      "commentButton": "Very informative!",
+      "upVoteIcon": 120,
+      "downVoteIcon": 40,
+      "shareButton": 20
+    },
+    {
+      "authorImage": "url_to_author_image_4.jpg",
+      "authorName": "Bob Williams",
+      "postTitle": "Introduction to Docker",
+      "postDescription": "Getting started with containerization using Docker.",
+      "tag": "Docker",
+      "postTime": "2023-11-21T12:00:00Z",
+      "commentButton": "I have a question.",
+      "upVoteIcon": 180,
+      "downVoteIcon": 70,
+      "shareButton": 25
+    },
+    {
+      "authorImage": "url_to_author_image_5.jpg",
+      "authorName": "Eva Davis",
+      "postTitle": "Responsive Web Design Techniques",
+      "postDescription": "Strategies for creating responsive web designs.",
+      "tag": "Web Design",
+      "postTime": "2023-11-20T17:30:00Z",
+      "commentButton": "Helped me a lot!",
+      "upVoteIcon": 90,
+      "downVoteIcon": 30,
+      "shareButton": 15
+    },
+    {
+        "authorImage": "url_to_author_image_2.jpg",
+        "authorName": "Jane Smith",
+        "postTitle": "Optimizing CSS for Performance",
+        "postDescription": "Tips on improving the performance of your CSS code.",
+        "tag": "CSS",
+        "postTime": "2023-11-23T15:45:00Z",
+        "commentButton": "Great insights!",
+        "upVoteIcon": 150,
+        "downVoteIcon": 50,
+        "shareButton": 30
+      },
+      {
+        "authorImage": "url_to_author_image_3.jpg",
+        "authorName": "Alice Johnson",
+        "postTitle": "JavaScript ES6 Features",
+        "postDescription": "Exploring the new features introduced in ECMAScript 2015.",
+        "tag": "JavaScript",
+        "postTime": "2023-11-22T08:15:00Z",
+        "commentButton": "Very informative!",
+        "upVoteIcon": 120,
+        "downVoteIcon": 40,
+        "shareButton": 20
+      },
+      {
+        "authorImage": "url_to_author_image_4.jpg",
+        "authorName": "Bob Williams",
+        "postTitle": "Introduction to Docker",
+        "postDescription": "Getting started with containerization using Docker.",
+        "tag": "Docker",
+        "postTime": "2023-11-21T12:00:00Z",
+        "commentButton": "I have a question.",
+        "upVoteIcon": 180,
+        "downVoteIcon": 70,
+        "shareButton": 25
+      },
+      {
+        "authorImage": "url_to_author_image_5.jpg",
+        "authorName": "Eva Davis",
+        "postTitle": "Responsive Web Design Techniques",
+        "postDescription": "Strategies for creating responsive web designs.",
+        "tag": "Web Design",
+        "postTime": "2023-11-20T17:30:00Z",
+        "commentButton": "Helped me a lot!",
+        "upVoteIcon": 90,
+        "downVoteIcon": 30,
+        "shareButton": 15
+      }
+  ]
+  

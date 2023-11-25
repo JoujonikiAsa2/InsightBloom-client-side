@@ -11,8 +11,6 @@ const Navbar = () => {
 
     const {user} = useAuth()
 
-
-    console.log(user.photoURL)
     // handle the logout button to logout a user
     const handleLogOut = () => {
         signOut(auth)
@@ -58,8 +56,8 @@ const Navbar = () => {
         </>
 
     return (
-        <div className="">
-            <div className="navbar bg-base-100 merriweather">
+        <div className="shadow-xl">
+            <div className="navbar merriweather">
                 <div className="navbar-start">
                     <div className="drawer lg:hidden">
                         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -105,13 +103,13 @@ const Navbar = () => {
                                 </button>
                             </Link>
                             <div className="dropdown dropdown-end">
-                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                    <div className="lg:w-8 w-8 rounded-full">
-                                        <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar mr-3">
+                                    <div className="lg:w-12 w-8 rounded-full border-2 border-blue-500">
+                                        <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 menu menu-sm dropdown-content bg-base-100 rounded-box w-52  text-base">
-                                    <li className=" cursor-text ml-3 text-blue-600">{user.displayName}</li>
+                                    <li className=" cursor-text ml-3 text-blue-600">{user?.displayName}</li>
                                     <li className="sidebar">
                                             <Link to="/membership">Dashboard</Link>
                                     </li>

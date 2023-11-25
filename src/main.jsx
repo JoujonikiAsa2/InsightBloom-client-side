@@ -7,6 +7,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import AuthProvider from './AuthProvider/AuthProvider.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  
   <React.StrictMode>
     <div className='max-w-[2200px] mx-[4vw]'>
       <AuthProvider>
