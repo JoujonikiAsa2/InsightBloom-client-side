@@ -92,10 +92,7 @@ const Navbar = () => {
                                     <NavLink to="/joinUs" className="btn bg-indigo-500 text-white">Join US</NavLink>
                                 </nav>
                             </li>
-                        </ul> : ""
-                    }
-                    {
-                        user &&
+                        </ul> : 
                         <>
                             <Link to="/notification" className="hidden lg:flex">
                                 <button className="btn btn-ghost btn-circle mr-2">

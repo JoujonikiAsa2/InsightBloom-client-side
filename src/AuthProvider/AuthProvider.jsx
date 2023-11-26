@@ -1,12 +1,15 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
+import { redirect } from "react-router-dom";
 
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const googleProvider = new GoogleAuthProvider()
+    const gitHubAuthProvider = new GithubAuthProvider()
 
     const createUser = (email,password) =>{
         setLoading(true)
@@ -17,6 +20,17 @@ const AuthProvider = ({children}) => {
     const login = (email,password) =>{
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    const googleLogin = (email,password) =>{
+        setLoading(true)
+        return signInWithPopup(auth,googleProvider)
+    }
+
+    
+    const gitHubLogin = (email,password) =>{
+        setLoading(true)
+        return signInWithRedirect(auth, gitHubAuthProvider)
     }
 
     const updateUserProfile = (name, photo) => {
@@ -39,12 +53,15 @@ const AuthProvider = ({children}) => {
             return unsubscribe()
         }
     },[])
+    
 
     const authInfo = {
         user,
         loading,
         createUser,
         login,
+        googleLogin,
+        gitHubLogin,
         updateUserProfile,
         signOut
     }

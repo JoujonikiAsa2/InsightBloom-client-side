@@ -5,7 +5,7 @@ import signUp from './register.json'
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { MdAddPhotoAlternate } from "react-icons/md";
 import { MdOutlineMail } from "react-icons/md";
-import { RiGoogleFill, RiLockPasswordLine } from "react-icons/ri";
+import { RiGithubFill, RiGoogleFill, RiLockPasswordLine } from "react-icons/ri";
 import './signUp.css'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -20,7 +20,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_API_key}`
 const SignUp = () => {
 
     const axiosPublic = useAxiosPublic()
-    const { createUser, updateUserProfile } = useAuth()
+    const { createUser, updateUserProfile, googleLogin, gitHubLogin } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -89,6 +89,90 @@ const SignUp = () => {
         }
     };
 
+    // handle social media login
+    const handleGoogle = () => {
+        googleLogin()
+            .then(res => {
+                console.log("User by Google Sign In", res.user)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Signed in successfully"
+                });
+                navigate(location.state || '/')
+            })
+            .catch(error => {
+                console.log(error)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "Signed in failed",
+                    text: `${error.message.slice(10, error.message.length - 1)}`
+                });
+            })
+    }
+    const handleGitHub = () => {
+        gitHubLogin()
+            .then(res => {
+                console.log("User by gitHub Sign In", res.user)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Signed in successfully"
+                });
+                navigate(location.state || '/')
+            })
+            .catch(error => {
+                console.log(error)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "Signed in failed",
+                    text: `${error.message.slice(10, error.message.length - 1)}`
+                });
+            })
+    }
+
     return (
         <div className="max-w-[2200px] mx-auto lg:h-[700px] flex flex-col justify-center items-center sm:py-12">
             <Helmet>
@@ -98,8 +182,8 @@ const SignUp = () => {
                 <h2 className="text-xl merriweather font-bold py-6">InsightBloom</h2>
             </div>
             <div className="flex flex-row-reverse gap-3">
-                <button className="flex gap-2 justify-center items-center btn bg-purple-500"><RiGoogleFill className="text-[#f2ea05] text-xl"></RiGoogleFill> Google</button>
-                <button className="flex gap-2 justify-center items-center btn bg-indigo-500"><RiGoogleFill className="text-[#f2ea05] text-xl"></RiGoogleFill> Google</button>
+                <button className="flex gap-2 justify-center items-center btn bg-purple-500" onClick={handleGoogle}><RiGoogleFill className="text-[#f2ea05] text-xl"></RiGoogleFill> Google</button>
+                <button className="flex gap-2 justify-center items-center btn bg-indigo-500" onClick={handleGitHub}><RiGithubFill className="text-[#FFF] text-xl"></RiGithubFill> GitHub</button>
             </div>
             <div className="flex justify-center items-center text-center text-xl font-bold py-6">
                 <p>Or</p>

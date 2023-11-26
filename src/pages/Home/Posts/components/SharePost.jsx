@@ -16,10 +16,7 @@ const SharePost = () => {
     
 
     return (
-        <div className='w-32 flex gap-2 justify-center items-center'>
-            <EmailShareButton url={postUrl}>
-                <EmailIcon size={28} round={true} />
-            </EmailShareButton>
+        <div className='flex gap-2 justify-center items-center'>
             <LinkedinShareButton url={linkedinUrl}>
                 <LinkedinIcon size={28} round={true}></LinkedinIcon>
             </LinkedinShareButton>

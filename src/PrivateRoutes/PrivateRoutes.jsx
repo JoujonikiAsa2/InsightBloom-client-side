@@ -1,6 +1,7 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
 import Loading from '../sharedComponents/Loading/Loading';
+import { Navigate } from 'react-router-dom';
 
 const PrivateRoutes = ({children}) => {
 
@@ -14,9 +15,7 @@ const PrivateRoutes = ({children}) => {
         return <Loading></Loading>
     }
     return (
-        <div>
-            
-        </div>
+        <Navigate to='/signIn' state={location.pathname}></Navigate>
     );
 };
 
