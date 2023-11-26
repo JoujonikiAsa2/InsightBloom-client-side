@@ -4,14 +4,14 @@ const Announcements = () => {
     return (
         <div>
             <SectionTitle heading="Announcements" details="You can the announcements from the admin."></SectionTitle>
-            <div data-aos="fade-right">
+            <div data-aos="fade-left">
                 <div className="overflow-x-auto">
                     <table className="table border-2 border-purple-500">
                         {/* head */}
                         <thead>
                             <tr>
                                 <th>
-                                    Author profile
+                                    Admin profile
                                 </th>
                                 <th>Name</th>
                                 <th>Announcement Title</th>
