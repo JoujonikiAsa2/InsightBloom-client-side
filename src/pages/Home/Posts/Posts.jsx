@@ -5,6 +5,7 @@ import Post from './components/Post';
 import './style.css'
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const Posts = () => {
 
@@ -79,35 +80,35 @@ const Posts = () => {
     }
 
     return (
-        <div>
-            <SectionTitle heading="Posts of our forum" details=" This section serves as a centralized hub for accessing a diverse range of discussions </br> and information within our forum community. Here, users can explore and engage with a variety of posts covering different topics and categories"></SectionTitle>
+        <div className='bg-white px-8 py-4 rounded-xl'>
+            <SectionTitle heading="Posts of our forum" details=" This section serves as a centralized hub for accessing a diverse range of discussions and information within our forum community. Here, users can explore and engage with a variety of posts covering different topics and categories"></SectionTitle>
 
             <div className='flex justify-center mb-8'>
                 <button className='btn bg-indigo-400 text-white' onClick={handlePopularButton}>Sort by Popularity</button>
             </div>
 
-            <div className='grid justify-center items-center justify-items-center gap-8'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center justify-items-center gap-12'>
                 {
                     posts.map((post, index) => <Post key={post._id} post={post} index={index}></Post>)
                 }
-                <div className='my-6 col-span-3 flex gap-2'>
-                    <div className="pagination">
-                        <div>
-                            <button className="btn" onClick={handlePreviousPage}>
-                                Prev
-                            </button></div>
-                        {
-                            pages.map(page => <button className={currentPage === page ? "btn btn-circle selected" : 'btn btn-circle'} key={page} onClick={() => {
-                                setCurrentPage(page)
-                                refetch()
-                            }}>{page}</button>)
-                        }
-                        <div><button className="btn" onClick={handleNextPage}>Next</button></div>
+            </div>
+            <div className='my-6 col-span-3 flex justify-center items-center gap-2'>
+                <div className="pagination">
+                    <div>
+                        <button className="btn border-[1px] border-gray-400" onClick={handlePreviousPage}>
+                            <FaArrowLeft/>
+                        </button></div>
+                    {
+                        pages.map(page => <button className={currentPage === page ? "btn btn-circle selected text-white" : 'btn btn-circle border-[1px] border-gray-400 m-[5px]'} key={page} onClick={() => {
+                            setCurrentPage(page)
+                            refetch()
+                        }}>{page}</button>)
+                    }
+                    <div><button className="btn border-[1px] border-gray-400" onClick={handleNextPage}><FaArrowRight></FaArrowRight></button></div>
 
-                    </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

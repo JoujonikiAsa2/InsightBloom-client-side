@@ -15,8 +15,8 @@ const Post = ({ post, index }) => {
 
 
     return (
-        <Link to={`/postDetails/:${post._id}`}>
-            <div className='card transition-colors shadow-xl rounded-lg h-56 w-[350px] p-4 space-y-4 pt-8'>
+        <Link to={`/postDetails/${post._id}`}>
+            <div className='card transition-colors shadow-xl rounded-lg h-56 w-80 lg:w-[350px] p-4 space-y-4 pt-8 bg-[#d4dae4]' data-aos={index%2==0 ? "flip-left" : "flip-right"}>
                 <div className="flex justify-start items-center gap-4">
                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="profile" className='w-10 h-10 rounded-full border-2 border-purple-500' />
                     <h2 className="text-md font-bold">

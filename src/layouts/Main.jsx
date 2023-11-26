@@ -12,9 +12,11 @@ const Main = () => {
         });
     }, [])
     return (
-        <div className="max-w-[2200px] mx-auto merriweather">
+        <div className="max-w-[2200px] merriweather bg-[#ebf0ec]">
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            <div className="mx-[4vw]">
+                <Outlet></Outlet>
+            </div>
             <Footer></Footer>
         </div>
     );

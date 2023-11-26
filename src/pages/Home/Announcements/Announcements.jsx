@@ -2,10 +2,10 @@ import SectionTitle from "../../../sharedComponents/SectionTitle/SectionTitle";
 
 const Announcements = () => {
     return (
-        <div>
+        <div className="bg-[white] my-8 py-8 rounded-xl">
             <SectionTitle heading="Announcements" details="You can the announcements from the admin."></SectionTitle>
             <div data-aos="fade-left">
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto mx-[3vw]">
                     <table className="table border-2 border-purple-500">
                         {/* head */}
                         <thead>

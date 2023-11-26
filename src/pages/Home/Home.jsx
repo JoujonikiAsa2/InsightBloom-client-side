@@ -6,7 +6,6 @@ import Posts from "./Posts/Posts";
 import { useLoaderData } from "react-router-dom";
 
 const Home = () => {
-    const {totalPost} = useLoaderData()
     return (
         <>
             <Helmet>
@@ -16,7 +15,7 @@ const Home = () => {
                 <Banner></Banner>
                 <Tag></Tag>
                 <Announcements></Announcements>
-                <Posts totalPost={totalPost}></Posts>
+                <Posts></Posts>
             </div>
         </>
     );

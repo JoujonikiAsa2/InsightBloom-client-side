@@ -4,14 +4,7 @@
     justify-content: center;
     align-items: center;
   }
-  
-  .btn-style {
-    margin:0.5rem;
-    padding: 0.5rem 0.8rem;
-    border: 1px solid #F4F9FD;
-    border-radius: 100%;
-  }
 
-  .pagination .selected {
-    background-color: #2BAFFC;
+.pagination .selected {
+    background-color: #5c86da;
   }
