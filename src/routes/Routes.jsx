@@ -9,6 +9,7 @@ import Login from "../pages/Login/Login";
 import PostDetails from "../pages/Home/Posts/components/postDetails";
 import Payment from "../pages/Memberships/Payment";
 import Memberships from "../pages/Memberships/Memberships";
+import Dashboard from "../layouts/Dashboard";
 const Routes = createBrowserRouter([
     {
         path: "/",
@@ -43,6 +44,10 @@ const Routes = createBrowserRouter([
     {
         path: '/signIn',
         element: <Login></Login>
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>
     }
 ]);
 

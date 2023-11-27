@@ -108,7 +108,7 @@ const Navbar = () => {
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 menu menu-sm dropdown-content bg-base-100 rounded-box w-52  text-base">
                                     <li className=" cursor-text ml-3 text-blue-600">{user?.displayName}</li>
                                     <li className="sidebar">
-                                            <Link to="/membership">Dashboard</Link>
+                                            <Link to="/dashboard">Dashboard</Link>
                                     </li>
                                     <li><button onClick={handleLogOut}>Logout</button></li>
                                 </ul>

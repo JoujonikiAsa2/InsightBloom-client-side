@@ -8,9 +8,9 @@ import {
     LinkedinShareButton,
 } from 'react-share';
 
-const SharePost = () => {
+const SharePost = ({postId}) => {
 
-    const postUrl = 'https://www.npmjs.com/package/react-loading'; 
+    const postUrl = `https://melodious-hotteok-2f36c1.netlify.app/postDetails/${postId}`; 
     const linkedinUrl = 'https://www.linkedin.com/'; 
     const messengerURL = 'https://www.facebook.com/'; 
     

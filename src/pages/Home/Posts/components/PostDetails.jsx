@@ -210,7 +210,7 @@ const PostDetails = () => {
                         <button className='btn btn-sm '><FaComments className=' text-lg'></FaComments>{commentPerPost.length}</button>
                         <button className={'btn btn-sm'} onClick={handleClickedUp}>{clicked && totalUpVotes == 1 && totalDownVotes == 0 ? <BiSolidUpvote className=' text-lg'></BiSolidUpvote> : <BiUpvote className=' text-lg'></BiUpvote>} <span >{totalUpVotes + post?.upVote}</span></button>
                         <button className={'btn btn-sm'} onClick={handleClickedDown}>{clicked && totalUpVotes == 0 && totalDownVotes == 1 ? <BiSolidDownvote className=' text-lg'></BiSolidDownvote> : <BiDownvote className=' text-lg'></BiDownvote>}{totalDownVotes + post?.downVote}</button>
-                        <div onClick={() => !user && navigate('/signIn', { state: location.pathname })}><SharePost className=' text-lg'></SharePost > {post?.postShare}</div>
+                        <div onClick={() => !user && navigate('/signIn', { state: location.pathname })}><SharePost postId={post._id} className=' text-lg'></SharePost > {post?.postShare}</div>
                     </div>
                 </div>
             </div>
