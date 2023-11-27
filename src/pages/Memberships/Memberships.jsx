@@ -3,8 +3,10 @@ import Payment from "./Payment";
 import badge from './badge.json'
 import { OKIcon } from "react-share";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Memberships = () => {
+    const {user} = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -13,7 +15,7 @@ const Memberships = () => {
     }
 
     const handleSubscription =()=>{
-        return navigate('/payment', {state:location.pathname})
+        return navigate(`/payment/${user.email}`, {state:location.pathname})
     }
     return (
         <div>

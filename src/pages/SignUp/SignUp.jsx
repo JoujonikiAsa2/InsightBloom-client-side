@@ -56,7 +56,7 @@ const SignUp = () => {
                         name: data.name,
                         email: data.email,
                         role: 'user',
-                        subscription: "none"
+                        membership: "Bronze"
                     }
 
                     axiosPublic.post('/users', userInfo)
@@ -108,22 +108,34 @@ const SignUp = () => {
     const handleGoogle = () => {
         googleLogin()
             .then(res => {
-                console.log("User by Google Sign In", res.user)
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                Toast.fire({
-                    icon: "success",
-                    title: "Signed in successfully"
-                });
+                const userInfo = {
+                    name: res.user.displayName,
+                    email: res.user.email,
+                    role: 'user',
+                    membership: "Bronze"
+                }
+
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            console.log("user added to the database")
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "Signed in successfully"
+                            });
+                        }
+                    })
                 navigate(location.state || '/')
             })
             .catch(error => {
@@ -149,22 +161,34 @@ const SignUp = () => {
     const handleGitHub = () => {
         gitHubLogin()
             .then(res => {
-                console.log("User by gitHub Sign In", res.user)
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                Toast.fire({
-                    icon: "success",
-                    title: "Signed in successfully"
-                });
+                const userInfo = {
+                    name: res.user.displayName,
+                    email: res.user.email,
+                    role: 'user',
+                    membership: "Bronze"
+                }
+
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            console.log("user added to the database")
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "Signed in successfully"
+                            });
+                        }
+                    })
                 navigate(location.state || '/')
             })
             .catch(error => {

@@ -31,7 +31,7 @@ const Routes = createBrowserRouter([
                 element: <PostDetails></PostDetails>
             },
             {
-                path: '/payment',
+                path: '/payment/:email',
                 element: <Payment></Payment>
             },
         ]

@@ -1,12 +1,14 @@
 import { CardElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
 import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 
 const CheckOutForm = () => {
+    const {email} = useParams()
 
     const stripe = useStripe();
     const elements = useElements();
@@ -27,6 +29,16 @@ const CheckOutForm = () => {
                 setClientSecret(res.data.clientSecret)
             })
     }, [axiosSecure, totalPrice])
+
+    const { refetch, data: users = [] } = useQuery({
+        queryKey: ["/users/email",email],
+        queryFn: async () => {
+            const result = await axiosSecure.get(`/users/email/${email}`)
+            return result.data
+        }
+    })
+
+    console.log("from line 40", users)
 
     const handleSubmit = async (event) => {
 
@@ -89,14 +101,42 @@ const CheckOutForm = () => {
                     price: totalPrice,
                     transactionId: paymentIntent.id,
                     date: new Date(),
-                    status: 'pending'
+                    status: 'successfull'
                 };
 
                 // console.log(payment)
 
                 const res = await axiosSecure.post('/payments', payment);
                 console.log('Payment saved:', res.data);
+                console.log("From line 108 of checkoutform", users._id)
 
+                axiosSecure.patch(`/users/${users._id}`)
+                    .then(res => {
+                        // console.log(res.user)
+                        if (res.data.modifiedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Wow Gold Member!",
+                                text: "You are now a Gold Member.",
+                                icon: "success"
+                            });
+                        }
+                        else {
+                            refetch()
+                            Swal.fire({
+                                title: "Already Added!",
+                                icon: "error"
+                            });
+
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: "Error!",
+                            text: `${error.message}`,
+                            icon: "error"
+                        });
+                    })
                 Swal.fire({
                     icon: "success",
                     title: 'Your Payment is successfully',
