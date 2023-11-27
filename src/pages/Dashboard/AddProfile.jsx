@@ -26,7 +26,7 @@ const AddProfile = () => {
     return (
         <div className="avatar flex flex-col gap-3 justify-center items-center pt-12 ">
             <div className="w-16 lg:w-24 rounded-full relative">
-                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                <img src={user?.photoURL} />
             </div>
             <div className='absolute top-10 left-[52%] rounded-full'>
                 {

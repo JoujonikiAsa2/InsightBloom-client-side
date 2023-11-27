@@ -1,8 +1,18 @@
 import React from 'react';
 import SectionTitle from '../../sharedComponents/SectionTitle/SectionTitle';
 import { useForm } from 'react-hook-form';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
+const image_API_key = import.meta.env.VITE_IMAGE_API_KEY
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_API_key}`
 
 const AddPost = () => {
+
+    const axiosPublic = useAxiosPublic()
+    const dateTime = new Date()
+    const time =  dateTime.toLocaleString()
+
+    console.log(time)
 
     const {
         handleSubmit, control,
@@ -18,8 +28,44 @@ const AddPost = () => {
         }
     )
 
-    const onSubmit = (data) => {
+    const onSubmit = async(data) => {
         console.log(data)
+        const imageFile = { image: data.authorImage[0] }
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        console.log(res.data.data.display_url)
+
+        if (res.data.success) {
+            const post = {
+                authorName: data.authorName,
+                authorEmail: data.authorEmail,
+                tag: data.tag,
+                authorImage: res.data.data.display_url,
+                postTitle: data.postTitle,
+                postDescription: data.postDescription,
+                upVote: data.upVote,
+                downVote: data.downVote,
+                time: time,
+                comment: 0
+            }
+            axiosPublic.post('/api/post', post)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Your work has been saved",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                })
+                .catch(error => console.log(error))
+        }
     }
 
     return (
@@ -33,7 +79,8 @@ const AddPost = () => {
                         <label className="label">
                             <span className="label-text">Author Image*</span>
                         </label>
-                        <input type='file' 
+                        <input type='file'
+                        {...register('authorImage', { required: true })} 
                         className="input input-bordered lg:w-full pt-2" />
                     </div>
                     <div className="form-control lgLw-full my-3">
@@ -85,7 +132,7 @@ const AddPost = () => {
                         <label className="label">
                             <span className="label-text">Tag*</span>
                         </label>
-                        <select defaultValue="default" {...register('category', { required: true })}
+                        <select defaultValue="default" {...register('tag', { required: true })}
                             className="select select-bordered lg:w-full">
                             <option disabled>Select a category</option>
                             <option value="web development">Web Development</option>
