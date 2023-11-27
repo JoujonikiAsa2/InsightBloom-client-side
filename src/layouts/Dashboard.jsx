@@ -16,9 +16,9 @@ const Dashboard = () => {
     }
 
     return (
-        <div className='flex flex-row-reverse min-h-screen '>
-            <div className='lg:w-64 bg-[#364253] fixed h-full overflow-y-auto z-30 text-white'>
-                <ul className='menu p-4 text-md'>
+        <div className='flex flex-row min-h-screen '>
+            <div className='w-36 md:w-64 lg:w-64 bg-[#99a6b9] fixed h-full z-30 text-black'>
+                <ul className='menu p-4 text-xs md:text-base lg:text-base'>
                     {
                         isAdmin ? <>
                             <li>
@@ -42,7 +42,7 @@ const Dashboard = () => {
                                     <NavLink to='/dashboard/addPost'><BsReceiptCutoff className=' text-xl'></BsReceiptCutoff  > Add Post</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/paymentHistory">
+                                    <NavLink to="/dashboard/myPost">
                                         <BsPostcardHeartFill className=' text-xl'></BsPostcardHeartFill >
                                         My Post</NavLink>
                                 </li>
@@ -55,7 +55,7 @@ const Dashboard = () => {
                     </li>
                 </ul>
             </div>
-            <div className='flex-1 mr-56'>
+            <div className='flex-1 ml-16'>
                 <Outlet></Outlet>
             </div>
         </div>

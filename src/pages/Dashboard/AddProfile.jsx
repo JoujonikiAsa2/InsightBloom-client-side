@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { axiosPublic } from '../../hooks/useAxiosPublic';
-import gold from '../Dashboard/medal1.png'
-import bronze from '../Dashboard/medal2.png'
+import gold from '../Dashboard/assets/medal1.png'
+import bronze from '../Dashboard/assets/medal2.png'
 
 
 const AddProfile = () => {
@@ -13,7 +13,9 @@ const AddProfile = () => {
 
     useEffect(() => {
         axiosPublic.get(`/users/email/${user.email}`)
-            .then(res => setUserDetails(res.data))
+            .then(res => {
+                setUserDetails(res.data)
+            })
             .catch(error => console.log(error))
     }, [])
 
@@ -34,13 +36,13 @@ const AddProfile = () => {
                             <img src={gold} className='w-20 h-20 border-2 rounded-full border-gray-500' />
                         </div>
                         : <div className="avatar">
-                            <div className="w-16 h-16 bg-blue-400 ">
+                            <div className="w-8 lg:w-12 bg-blue-400 ">
                                 <img src={bronze} className='w-full h-full border-2 rounded-full border-gray-500' />
                             </div>
                         </div>
                 }
             </div>
-            <h5 className='text-xl capitalize'>{user?.displayName}</h5>
+            <h5 className='text-xs lg:text-xl capitalize'>{user?.displayName}</h5>
             <p className='text-xs'>{user?.email}</p>
         </div>
     );

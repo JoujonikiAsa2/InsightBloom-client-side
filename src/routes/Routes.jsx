@@ -11,6 +11,8 @@ import Payment from "../pages/Memberships/Payment";
 import Memberships from "../pages/Memberships/Memberships";
 import Dashboard from "../layouts/Dashboard";
 import AddProfile from "../pages/Dashboard/AddProfile";
+import AddPost from "../pages/Dashboard/AddPost";
+import MyPost from "../pages/Dashboard/MyPost";
 const Routes = createBrowserRouter([
     {
         path: "/",
@@ -49,10 +51,20 @@ const Routes = createBrowserRouter([
     {
         path: 'dashboard',
         element: <Dashboard></Dashboard>,
-        children: [ {
-            path: 'userProfile',
-            element: <AddProfile></AddProfile>
-        }]
+        children: [
+            {
+                path: 'userProfile',
+                element: <AddProfile></AddProfile>
+            },
+            {
+                path: 'addPost',
+                element: <AddPost></AddPost>
+            },
+            {
+                path: 'myPost',
+                element: <MyPost></MyPost>
+            },
+        ]
     }
 ]);
 

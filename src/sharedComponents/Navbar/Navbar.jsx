@@ -69,7 +69,7 @@ const Navbar = () => {
                         </div>
                         <div className="drawer-side">
                             <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                            <ul className="menu p-4 w-48 min-h-full bg-base-200 text-xs">
+                            <ul className="menu p-4 w-48 min-h-full bg-base-200 text-xs righteous">
                                 {/* Sidebar content here */}
                                 {links}
                             </ul>
@@ -78,9 +78,9 @@ const Navbar = () => {
                     <div className="btn btn-ghost text-xl lg:flex hidden righteous"> <img src={logo1} className="w-10 h-10" alt=""/>InsightBloom</div>
                 </div>
                 <div className="navbar-center">
-                    <div className="btn btn-ghost lg:text-xl text-base lg:hidden righteous"><img src={logo1} alt="" className="w-6 h-6 " /><span >InsightBloom</span></div>
+                    <div className="btn btn-ghost lg:text-xl text-base lg:hidden"><img src={logo1} alt="" className="w-6 h-6 " /><span >InsightBloom</span></div>
 
-                    <ul className=" hidden lg:flex menu menu-horizontal px-1 text-lg">
+                    <ul className=" hidden lg:flex menu menu-horizontal px-1 text-lg  righteous">
                         {links}
                     </ul>
                 </div>
@@ -108,7 +108,7 @@ const Navbar = () => {
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 menu menu-sm dropdown-content bg-base-100 rounded-box w-52  text-base">
                                     <li className=" cursor-text ml-3 text-blue-600">{user?.displayName}</li>
                                     <li className="sidebar">
-                                            <Link to='/dashboard'>Dashboard</Link>
+                                            <Link to='/dashboard/userProfile'>Dashboard</Link>
                                     </li>
                                     <li><button onClick={handleLogOut}>Logout</button></li>
                                 </ul>
