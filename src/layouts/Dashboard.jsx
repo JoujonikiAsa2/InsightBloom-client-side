@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
 import { FaHome, FaList, FaUsers, } from 'react-icons/fa';
-import { RiCalendarFill, RiFeedbackFill, RiReservedFill } from 'react-icons/ri';
-import { NavLink, Outlet } from 'react-router-dom';
+import { RiCalendarFill,} from 'react-icons/ri';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { BsPostcardHeartFill, BsPersonCircle, BsReceiptCutoff } from "react-icons/bs";
+import Loading from '../sharedComponents/Loading/Loading';
+import useAdmin from '../hooks/useAdmin';
 
 
 const Dashboard = () => {
 
-    const [isAdmin, setIsaddmin] = useState(false)
+    const [isAdmin,isAdminLoading] = useAdmin()
+    console.log(isAdmin)
+
+    if(isAdminLoading){
+        return <Loading></Loading>
+    }
+
     return (
         <div className='flex flex-row-reverse min-h-screen '>
-            <div className='w-64 bg-[#364253] fixed h-full overflow-y-auto z-30 text-white'>
+            <div className='lg:w-64 bg-[#364253] fixed h-full overflow-y-auto z-30 text-white'>
                 <ul className='menu p-4 text-md'>
                     {
                         isAdmin ? <>
@@ -48,7 +55,7 @@ const Dashboard = () => {
                     </li>
                 </ul>
             </div>
-            <div className='flex-1 ml-64'>
+            <div className='flex-1 mr-56'>
                 <Outlet></Outlet>
             </div>
         </div>

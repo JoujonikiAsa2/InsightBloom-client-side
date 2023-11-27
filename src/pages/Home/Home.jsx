@@ -11,7 +11,7 @@ const Home = () => {
             <Helmet>
                 <title>InsightBloom | Home</title>
             </Helmet>
-            <div>
+            <div className=" -z-0">
                 <Banner></Banner>
                 <Tag></Tag>
                 <Announcements></Announcements>

@@ -58,7 +58,7 @@ const Navbar = () => {
     return (
         <div className="shadow-xl">
             <div className="navbar merriweather">
-                <div className="navbar-start">
+                <div className="navbar-start  z-30">
                     <div className="drawer lg:hidden">
                         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                         <div className="drawer-content">
@@ -108,7 +108,7 @@ const Navbar = () => {
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 menu menu-sm dropdown-content bg-base-100 rounded-box w-52  text-base">
                                     <li className=" cursor-text ml-3 text-blue-600">{user?.displayName}</li>
                                     <li className="sidebar">
-                                            <Link to="/dashboard">Dashboard</Link>
+                                            <Link to='/dashboard'>Dashboard</Link>
                                     </li>
                                     <li><button onClick={handleLogOut}>Logout</button></li>
                                 </ul>

@@ -5,6 +5,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { axiosPublic } from '../../hooks/useAxiosPublic';
 
 
 const CheckOutForm = () => {
@@ -104,9 +105,9 @@ const CheckOutForm = () => {
                     status: 'successfull'
                 };
 
-                // console.log(payment)
+                console.log(payment)
 
-                const res = await axiosSecure.post('/payments', payment);
+                const res = await axiosPublic.post('/payments', payment);
                 console.log('Payment saved:', res.data);
                 console.log("From line 108 of checkoutform", users._id)
 
@@ -140,7 +141,6 @@ const CheckOutForm = () => {
                 Swal.fire({
                     icon: "success",
                     title: 'Your Payment is successfully',
-                    confirmButtonText: "Payment History",
                     customClass: {
                         // Add custom classes for styling
                         title: 'text-lg',
@@ -148,11 +148,6 @@ const CheckOutForm = () => {
                     showCancelButton: true,
                     cancelButtonText: "Go Back"
 
-                }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        navigate("/dashboard/paymentHistory", { state: { from: location } })
-                    }
                 })
 
                 refetch()

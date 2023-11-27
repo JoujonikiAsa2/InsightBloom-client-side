@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SectionTitle from '../../../sharedComponents/SectionTitle/SectionTitle';
-import usePosts from '../../../hooks/usePosts';
 import Post from './components/Post';
 import './style.css'
-import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 

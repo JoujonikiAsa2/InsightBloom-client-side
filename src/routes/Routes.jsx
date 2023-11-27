@@ -10,6 +10,7 @@ import PostDetails from "../pages/Home/Posts/components/postDetails";
 import Payment from "../pages/Memberships/Payment";
 import Memberships from "../pages/Memberships/Memberships";
 import Dashboard from "../layouts/Dashboard";
+import AddProfile from "../pages/Dashboard/AddProfile";
 const Routes = createBrowserRouter([
     {
         path: "/",
@@ -46,8 +47,12 @@ const Routes = createBrowserRouter([
         element: <Login></Login>
     },
     {
-        path: '/dashboard',
-        element: <Dashboard></Dashboard>
+        path: 'dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [ {
+            path: 'userProfile',
+            element: <AddProfile></AddProfile>
+        }]
     }
 ]);
 
