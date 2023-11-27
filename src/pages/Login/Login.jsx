@@ -155,7 +155,7 @@ const Login = () => {
     return (
         <div className="max-w-[2200px] mx-auto h-[700px] flex flex-col justify-center items-center">
             <Helmet>
-                <title>InsightBloom | SignUp</title>
+                <title>InsightBloom | SignIn</title>
             </Helmet>
             <div>
                 <h2 className="text-xl merriweather font-bold py-6">InsightBloom</h2>

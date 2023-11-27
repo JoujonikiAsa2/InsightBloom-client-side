@@ -32,8 +32,8 @@ const SignUp = () => {
 
     // get data on submit the form
     const onSubmit = async (data) => {
-        console.log(data, data.photo[0])
-        const imageFile = { image: data.photo[0]}
+        // console.log(data, data.photo[0])
+        const imageFile = { image: data.photo[0] }
         console.log(imageFile)
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
@@ -46,26 +46,41 @@ const SignUp = () => {
             createUser(data.email, data.password)
                 .then(res => {
                     console.log(res)
-                    
-                    updateUserProfile(data.name,photo )
+
+                    updateUserProfile(data.name, photo)
                         .then(() => { console.log("Updated") })
                         .catch(error => console.log(error))
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.onmouseenter = Swal.stopTimer;
-                            toast.onmouseleave = Swal.resumeTimer;
-                        }
-                    });
-                    Toast.fire({
-                        icon: "success",
-                        title: "Signed up successfully"
-                    });
-                    navigate('/login')
+
+
+                    const userInfo = {
+                        name: data.name,
+                        email: data.email,
+                        role: 'user',
+                        subscription: "none"
+                    }
+
+                    axiosPublic.post('/users', userInfo)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                                console.log("user added to the database")
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: "top-end",
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.onmouseenter = Swal.stopTimer;
+                                        toast.onmouseleave = Swal.resumeTimer;
+                                    }
+                                });
+                                Toast.fire({
+                                    icon: "success",
+                                    title: "Signed in successfully"
+                                });
+                            }
+                        })
+                    navigate('/signIn')
                 })
                 .catch(error => {
                     console.log(error)

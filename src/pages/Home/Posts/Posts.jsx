@@ -38,11 +38,8 @@ const Posts = () => {
     const [currentPage, setCurrentPage] = useState(0)
 
     // Loaded data
-    const [url, setUrl] = useState('')
-
-
     useEffect(() => {
-        axiosPublic.get(`/api/posts?page=${currentPage}&size=${itemsPerPage}`)
+        axiosPublic.get(`/api/post?page=${currentPage}&size=${itemsPerPage}`)
             .then(res => setPosts(res.data))
             .catch(error => console.log(error))
     }, [currentPage, itemsPerPage])
@@ -73,7 +70,7 @@ const Posts = () => {
     // filtered data by popularity
     const handlePopularButton = () => {
         // setUrl('')
-        axiosPublic.get(`/api/posts/popular?page=${currentPage}&size=${itemsPerPage}`)
+        axiosPublic.get(`/api/post/popular?page=${currentPage}&size=${itemsPerPage}`)
             .then(res => setPosts(res.data))
             .catch(error => console.log(error))
         console.log('I am clicked')
