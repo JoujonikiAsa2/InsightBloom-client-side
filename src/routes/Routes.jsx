@@ -3,12 +3,12 @@ import {
 } from "react-router-dom";
 import Main from "../layouts/Main";
 import Home from "../pages/Home/Home";
-import MemberShips from "../pages/MemberShips/MemberShips";
 import Notifications from "../pages/Notifications/Notifications";
 import SignUp from "../pages/SignUp/SignUp";
 import Login from "../pages/Login/Login";
 import PostDetails from "../pages/Home/Posts/components/postDetails";
-import { axiosPublic } from "../hooks/useAxiosPublic";
+import Payment from "../pages/Memberships/Payment";
+import Memberships from "../pages/Memberships/Memberships";
 const Routes = createBrowserRouter([
     {
         path: "/",
@@ -20,7 +20,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: '/membership',
-                element: <MemberShips></MemberShips>
+                element: <Memberships></Memberships>
             },
             {
                 path: '/notification',
@@ -29,6 +29,10 @@ const Routes = createBrowserRouter([
             {
                 path: '/postDetails/:id',
                 element: <PostDetails></PostDetails>
+            },
+            {
+                path: '/payment',
+                element: <Payment></Payment>
             },
         ]
     },
