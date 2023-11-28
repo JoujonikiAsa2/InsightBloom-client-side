@@ -43,7 +43,10 @@ const ReportedActivities = () => {
                                 icon: "success"
                             });
                             axiosPublic.patch(`/api/reports/${reportId}`)
-                            .then(res=>console.log(res.data))
+                            .then(res=>{
+                                refetch()
+                                console.log(res.data)
+                            })
                             .catch(error=>console.log(error))
                         }
                         else {

@@ -196,7 +196,8 @@ const AllComment = () => {
             comment_id: comment_id,
             report: report,
             commenter_email: commenter_email,
-            repoter_email: user.email
+            repoter_email: user.email,
+            action: 'not deleted'
         }
         console.log("Report from my report", {feedback: feedback})
         axiosPublic.post('/api/reports', feedback)
