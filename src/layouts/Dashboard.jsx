@@ -26,7 +26,7 @@ const Dashboard = () => {
                     <NavLink to='/dashboard/manageUsers'><RiCalendarFill className=' text-xl'></RiCalendarFill> Manage Users</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/dashboard/manageComments'><FaUsers className=' text-xl'></FaUsers> Reported Activities</NavLink>
+                    <NavLink to='/dashboard/reportedActivities'><FaUsers className=' text-xl'></FaUsers> Reported Activities</NavLink>
                 </li>
             </> :
                 <>
@@ -66,7 +66,7 @@ const Dashboard = () => {
                                     <NavLink to='/dashboard/manageUsers'><RiCalendarFill className=' text-xs'></RiCalendarFill> Manage Users</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/dashboard/manageComments'><FaUsers className=' text-xs'></FaUsers> Reported Activities</NavLink>
+                                    <NavLink to='/dashboard/reportedActivities'><FaUsers className=' text-xs'></FaUsers> Reported Activities</NavLink>
                                 </li>
                             </> :
                             <>

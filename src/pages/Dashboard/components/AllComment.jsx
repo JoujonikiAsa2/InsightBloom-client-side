@@ -191,9 +191,9 @@ const AllComment = () => {
         }
     }
 
-    const myReport = (post_id, commenter_email) => {
+    const myReport = (comment_id, commenter_email) => {
         const feedback = {
-            post_id: post_id,
+            comment_id: comment_id,
             report: report,
             commenter_email: commenter_email,
             repoter_email: user.email
@@ -206,9 +206,9 @@ const AllComment = () => {
                     Swal.fire({
                         position: "top-center",
                         icon: "success",
-                        title: "Your work has been saved",
+                        title: "Reported Successfully",
                         showConfirmButton: false,
-                        timer: 1000
+                        timer: 1000,
                     });
                 }
 
@@ -257,7 +257,7 @@ const AllComment = () => {
                                             </select>
                                         </td>
                                         <td>
-                                            <button className='btn btn-sm bg-red-300' onClick={()=>myReport(comment.post_id, comment.email)} disabled={disabled}><BiSolidReport></BiSolidReport></button>
+                                            <button className='btn btn-sm bg-red-300' onClick={()=>myReport(comment._id, comment.email)} disabled={disabled}><BiSolidReport></BiSolidReport></button>
                                         </td>
 
                                     </tr>)

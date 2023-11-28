@@ -18,6 +18,7 @@ import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import ManageUser from "../pages/Dashboard/Admin/ManageUser";
 import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
+import ReportedActivities from "../pages/Dashboard/Admin/ReportedActivities";
 const Routes = createBrowserRouter([
     {
         path: "/",
@@ -85,8 +86,8 @@ const Routes = createBrowserRouter([
                 element: <ManageUser></ManageUser>
             },
             {
-                path: 'manageComments',
-                element: <PrivateRoutes><AdminProfile></AdminProfile></PrivateRoutes>
+                path: 'reportedActivities',
+                element: <ReportedActivities></ReportedActivities>
             },
             {
                 path: 'createAnnouncement',
