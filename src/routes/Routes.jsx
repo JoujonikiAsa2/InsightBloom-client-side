@@ -17,6 +17,7 @@ import AllComment from "../pages/Dashboard/components/AllComment";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import ManageUser from "../pages/Dashboard/Admin/ManageUser";
+import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
 const Routes = createBrowserRouter([
     {
         path: "/",
@@ -89,7 +90,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: 'createAnnouncement',
-                element: <ManageUser></ManageUser>
+                element: <MakeAnnouncement></MakeAnnouncement>
             }
         ]
     }
