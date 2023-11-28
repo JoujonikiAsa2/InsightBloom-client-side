@@ -13,6 +13,10 @@ import Dashboard from "../layouts/Dashboard";
 import AddProfile from "../pages/Dashboard/AddProfile";
 import AddPost from "../pages/Dashboard/AddPost";
 import MyPost from "../pages/Dashboard/MyPost";
+import AllComment from "../pages/Dashboard/components/AllComment";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import ManageUser from "../pages/Dashboard/Admin/ManageUser";
 const Routes = createBrowserRouter([
     {
         path: "/",
@@ -24,7 +28,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: '/membership',
-                element: <Memberships></Memberships>
+                element: <PrivateRoutes><Memberships></Memberships></PrivateRoutes>
             },
             {
                 path: '/notification',
@@ -52,9 +56,10 @@ const Routes = createBrowserRouter([
         path: 'dashboard',
         element: <Dashboard></Dashboard>,
         children: [
+            // For user's dashboard
             {
                 path: 'userProfile',
-                element: <AddProfile></AddProfile>
+                element: <PrivateRoutes><AddProfile></AddProfile></PrivateRoutes>
             },
             {
                 path: 'addPost',
@@ -64,6 +69,28 @@ const Routes = createBrowserRouter([
                 path: 'myPost',
                 element: <MyPost></MyPost>
             },
+            {
+                path: 'allcomment/:id',
+                element: <AllComment></AllComment>
+            },
+
+            // For admin's dashboard
+            {
+                path: 'adminProfile',
+                element: <PrivateRoutes><AdminProfile></AdminProfile></PrivateRoutes>
+            },
+            {
+                path: 'manageUsers',
+                element: <ManageUser></ManageUser>
+            },
+            {
+                path: 'manageComments',
+                element: <PrivateRoutes><AdminProfile></AdminProfile></PrivateRoutes>
+            },
+            {
+                path: 'createAnnouncement',
+                element: <ManageUser></ManageUser>
+            }
         ]
     }
 ]);

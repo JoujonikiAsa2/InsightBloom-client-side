@@ -13,7 +13,6 @@ const AddProfile = () => {
 
     const { user, loading } = useAuth()
     const userPost = useUserPost()
-    
 
     // console.log(user)
 
@@ -39,22 +38,25 @@ const AddProfile = () => {
                 </div>
                 <div className='absolute top-10 left-[52%] rounded-full'>
                     {
-                        userDetails.membership == 'Gold'
-                            ?
-                            <div className="w-8 lg:w-12 bg-gray-400 ">
-                                <img src={gold} className='w-20 h-20 border-2 rounded-full border-gray-500' />
-                            </div>
-                            : <div className="avatar">
-                                <div className="w-8 lg:w-12 bg-blue-400 ">
-                                    <img src={bronze} className='w-full h-full border-2 rounded-full border-gray-500' />
+                        userDetails.role == 'user' && <>
+
+                            {userDetails.membership == 'Gold'
+                                ?
+                                <div className="w-8 lg:w-12 bg-gray-400 ">
+                                    <img src={gold} className='w-20 h-20 border-2 rounded-full border-gray-500' />
                                 </div>
-                            </div>
+                                : <div className="avatar">
+                                    <div className="w-8 lg:w-12 bg-blue-400 ">
+                                        <img src={bronze} className='w-full h-full border-2 rounded-full border-gray-500' />
+                                    </div>
+                                </div>}</>
                     }
                 </div>
                 <h5 className='text-xs text-purple-800 righteous lg:text-2xl capitalize'>{user?.displayName}</h5>
                 <p className='text-xs'>{user?.email}</p>
             </div>
             <div className='divider'></div>
+
             <div className='grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 justify-center items-center justify-items-center lg:mx-36 mt-12 gap-4 m-4'>
                 <div className='space-y-3 bg-indigo-400 text-3xl font-bold w-80 lg:w-96 h-36 rounded-lg flex flex-col justify-center items-center'>
                     <h3 className='text-white'>Your Post</h3>
@@ -64,7 +66,7 @@ const AddProfile = () => {
                     <h3 className='text-white'>Available Post</h3>
                     <h5 className='text-[#3f5f20]'>
                         {
-                            5-userPost.length 
+                            5 - userPost.length
                         }</h5>
                 </div>
             </div>

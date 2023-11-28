@@ -11,6 +11,8 @@ const Navbar = () => {
 
     const {user} = useAuth()
 
+    console.log(user?.photoURL)
+
     // handle the logout button to logout a user
     const handleLogOut = () => {
         signOut(auth)
@@ -46,11 +48,6 @@ const Navbar = () => {
             <li>
                 <nav className="sidebar">
                     <NavLink to="/membership">Membership</NavLink>
-                </nav>
-            </li>
-            <li>
-                <nav className="sidebar">
-                    <NavLink to="/notification">Notification</NavLink>
                 </nav>
             </li>
         </>
@@ -89,7 +86,7 @@ const Navbar = () => {
                         !user ? <ul>
                             <li>
                                 <nav className="sidebar">
-                                    <NavLink to="/joinUs" className="btn bg-indigo-500 text-white">Join US</NavLink>
+                                    <NavLink to="/signIn" className="btn bg-indigo-500 text-white">Join US</NavLink>
                                 </nav>
                             </li>
                         </ul> : 
@@ -102,7 +99,7 @@ const Navbar = () => {
                             <div className="dropdown dropdown-end">
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar mr-3">
                                     <div className="lg:w-12 w-8 rounded-full border-2 border-blue-500">
-                                        <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+                                        <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="mt-3 z-[1] p-2 menu menu-sm dropdown-content bg-base-100 rounded-box w-52  text-base">
