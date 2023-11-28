@@ -19,12 +19,13 @@ const AllComment = () => {
     const { id } = useParams();
     const [clicked, setClicked] = useState(false)
     const [disabled, setDisabled] = useState(true)
+    const [report, setReport] = useState("")
 
     const location = useLocation()
     const navigate = useNavigate()
 
     const { user } = useAuth()
-    console.log(location)
+    // console.log(location)
 
     // fatching post data by id
     const { isLoading, error, refetch, data: post = [] } = useQuery({
@@ -35,7 +36,6 @@ const AllComment = () => {
         },
     })
 
-    // fetching all comments 
     const { refetch: refaching, data: comments = [] } = useQuery({
         queryKey: ['comment'],
         queryFn: async () => {
@@ -44,7 +44,6 @@ const AllComment = () => {
         },
     })
 
-    // fetching comment by email
     const { refetch: reFetch, data: comment = [] } = useQuery({
         queryKey: ['/comments/count'],
         queryFn: async () => {
@@ -53,7 +52,6 @@ const AllComment = () => {
         }
     })
 
-    // fetching comment by email
     const { refetch: refetchComment, data: commentPerPost = [] } = useQuery({
         queryKey: ['commentPerPost', id],
         queryFn: async () => {
@@ -61,6 +59,7 @@ const AllComment = () => {
             return res.data
         }
     })
+
 
 
     const [totalUpVotes, setTotalUpVotes] = useState(0)
@@ -192,51 +191,81 @@ const AllComment = () => {
         }
     }
 
+    const myReport = (post_id, commenter_email) => {
+        const feedback = {
+            post_id: post_id,
+            report: report,
+            commenter_email: commenter_email,
+            repoter_email: user.email
+        }
+        console.log("Report from my report", {feedback: feedback})
+        axiosPublic.post('/api/reports', feedback)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-center",
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                }
+
+            })
+            .catch(error => console.log(error))
+        setDisabled(true)
+    }
+
     return (
         <div className='mt-4'>
 
             {/* All comment */}
-            <div className='bg-white rounded-xl min-h-content p-8 mb-20 w-full'>
+            <div className='bg-white rounded-xl min-h-content p-8 mb-20 '>
                 <h2 className='text-xl font-bold py-4'>Comments</h2>
-                <table className='table overflow-scroll'>
-                    <thead className='border-t-2 border-x-2 border-gray-200'>
-                        <tr className='flex justify-between items-center text-black font-bold text-lg w-7/8'>
-                            <th className='w-24 '>#</th>
-                            <th className='w-60'>Email</th>
-                            <th className='w-96'>Comment </th>
-                            <th className='w-48'>Feedback</th>
-                            <th className='w-28'>Report </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            commentPerPost.map((comment, index) =>
-                                <tr className='flex justify-between items-center border-2 border-l-gray-300 w-full'>
-                                    <td className='w-24'>{index + 1}</td>
-                                    <td className='w-60'>{comment.email}</td>
-                                    <td className='w-96'>
-                                        <div className='py-3 overflow-x-ellipsis overflow-clip'>
-                                            {comment.comment}
-                                        </div>
-                                    </td>
-                                    <td className='flex gap-2 justify-center items-center w-48 text-xl'>
-                                        <form className='flex gap-2'>
-                                            <select className='input input-bordered pr-2 w-40 h-8 text-gray-400' onChange={()=>setDisabled(false)}>
-                                                <option value="You are not doing the right thing!!">You are not doing the right thing!!</option>
-                                                <option value="Against otf the terms and comdition!!">Against otf the terms and comdition!!!!</option>
-                                                <option value="You are not doing the right thing!!">You are not doing the right thing!!</option>
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th className='w-24 '>#</th>
+                                <th className='w-60'>Email</th>
+                                <th className='w-96'>Comment </th>
+                                <th className='w-48'>Feedback</th>
+                                <th className='w-28'>Report </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                commentPerPost.map((comment, index) =>
+                                    <tr className=''>
+                                        <td className='w-24'>{index + 1}</td>
+                                        <td className='w-60'>{comment.email}</td>
+                                        <td className='w-96'>
+                                            <div className=''>
+                                                {comment.comment}
+                                            </div>
+                                        </td>
+                                        <td className=''>
+                                            <select className='input input-bordered pr-2 w-40 h-8 text-gray-400' onChange={(e) => {
+                                                setReport(e.target.value)
+                                                setDisabled(false)
+                                            }}>
+                                                <option value="spam">Spam</option>
+                                                <option value="harassment">Harassment</option>
+                                                <option value="inappropriate content">Inappropriate content,</option>
                                             </select>
-                                            <button className='btn bg-green-300 btn-sm'><RiFeedbackFill></RiFeedbackFill></button>
-                                        </form>
-                                    </td>
-                                    <td className='flex gap-2  justify-center items-center w-28 text-xl'>
-                                        <button className='btn btn-sm bg-red-300' disabled={disabled}><BiSolidReport></BiSolidReport></button>
-                                    </td>
+                                        </td>
+                                        <td>
+                                            <button className='btn btn-sm bg-red-300' onClick={()=>myReport(comment.post_id, comment.email)} disabled={disabled}><BiSolidReport></BiSolidReport></button>
+                                        </td>
 
-                                </tr>)
-                        }
-                    </tbody>
-                </table>
+                                    </tr>)
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
         </div>
     );
