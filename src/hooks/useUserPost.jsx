@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from './useAuth';
-import { useQuery } from '@tanstack/react-query';
-import { axiosPublic } from './useAxiosPublic';
+import useAxiosPublic from './useAxiosPublic'
+
 
 const useUserPost = () => {
     const {user} = useAuth()
+    const axiosPublic = useAxiosPublic()
     const [userPost, setUserPost] = useState([])
 
     useEffect(() => {

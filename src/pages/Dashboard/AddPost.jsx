@@ -5,6 +5,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import useUserPost from '../../hooks/useUserPost';
 import useAuth from '../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 const image_API_key = import.meta.env.VITE_IMAGE_API_KEY
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_API_key}`
 
@@ -143,7 +144,7 @@ const AddPost = () => {
                             <label className="label">
                                 <span className="label-text">Post Description</span>
                             </label>
-                            <textarea {...register('postDescription')} className="textarea textarea-bordered h-24" placeholder="Post Description"></textarea>
+                            <textarea {...register('postDescription', { required: true })} className="textarea textarea-bordered h-24" placeholder="Post Description"></textarea>
                         </div>
                         <div className="form-control lg:w-full my-3">
                             <label className="label">
@@ -185,9 +186,14 @@ const AddPost = () => {
                             </div>
                         </div>
                         <div className="flex justify-center items-center my-3">
-                            <button className="btn bg-indigo-500 text-white mb-3" disabled={userDetails.membership=="bronze" && userPost.length>=5 ? true :  false}>
+                            <button className="btn bg-indigo-500 text-white mb-3" disabled={userDetails.membership == "bronze" && userPost.length >= 5 ? true : false}>
                                 Add Potst
                             </button>
+                            <Link to='/membership'>
+                                <button className={(userDetails.membership == "bronze" && userPost.length >= 5) && 'btn bg-indigo-500 text-white mb-3 hidden'}>
+                                    Become a Member
+                                </button>
+                            </Link>
                         </div>
                     </form>
                 </div>

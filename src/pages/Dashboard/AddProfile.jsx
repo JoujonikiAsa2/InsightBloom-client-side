@@ -7,6 +7,7 @@ import Post from '../Home/Posts/components/Post';
 import useUserPost from '../../hooks/useUserPost';
 import Lottie from 'lottie-react';
 import nodata from './nodata.json'
+import { Helmet } from 'react-helmet';
 
 
 const AddProfile = () => {
@@ -32,42 +33,41 @@ const AddProfile = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Dashboard | Add Profile</title>
+            </Helmet>
             <div className="avatar flex flex-col gap-3 justify-center items-center pt-12 ">
                 <div className="w-16 lg:w-20 rounded-full relative bg-slate-500">
                     <img src={user?.photoURL} />
                 </div>
                 <div className='absolute top-10 left-[52%] rounded-full'>
                     {
-                        userDetails.role == 'user' && <>
+                        userDetails.role == 'user' &&
+                        <>
 
-                            {userDetails.membership == 'Gold'
-                                ?
-                                <div className="w-8 lg:w-12 bg-gray-400 ">
-                                    <img src={gold} className='w-20 h-20 border-2 rounded-full border-gray-500' />
-                                </div>
-                                : <div className="avatar">
-                                    <div className="w-8 lg:w-12 bg-blue-400 ">
-                                        <img src={bronze} className='w-full h-full border-2 rounded-full border-gray-500' />
+                            {
+                                userDetails.membership == 'Gold'
+                                    ?
+                                    <div className="w-8 lg:w-12 bg-gray-400 ">
+                                        <img src={gold} className='w-20 h-20 border-2 rounded-full border-gray-500' />
                                     </div>
-                                </div>}</>
+                                    : <div className="avatar">
+                                        <div className="w-8 lg:w-12 bg-blue-400 ">
+                                            <img src={bronze} className='w-full h-full border-2 rounded-full border-gray-500' />
+                                        </div>
+                                    </div>
+                            }
+                        </>
                     }
                 </div>
                 <h5 className='text-xs text-purple-800 righteous lg:text-2xl capitalize'>{user?.displayName}</h5>
                 <p className='text-xs'>{user?.email}</p>
             </div>
             <div className='divider'></div>
-
             <div className='grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 justify-center items-center justify-items-center lg:mx-36 mt-12 gap-4 m-4'>
-                <div className='space-y-3 bg-indigo-400 text-3xl font-bold w-80 lg:w-96 h-36 rounded-lg flex flex-col justify-center items-center'>
+                <div className='stat space-y-3 bg-indigo-400 text-3xl font-bold w-80 lg:w-96 h-36 rounded-lg flex flex-col justify-center items-center'>
                     <h3 className='text-white'>Your Post</h3>
                     <h5 className='text-purple-800'>{userPost.length}</h5>
-                </div>
-                <div className='space-y-3 bg-indigo-400 text-3xl font-bold w-80 lg:w-96 h-36 rounded-lg flex flex-col justify-center items-center'>
-                    <h3 className='text-white'>Available Post</h3>
-                    <h5 className='text-[#3f5f20]'>
-                        {
-                            5 - userPost.length
-                        }</h5>
                 </div>
             </div>
             <div className='my-12'>

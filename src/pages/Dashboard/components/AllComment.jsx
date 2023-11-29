@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { FaComments } from 'react-icons/fa';
-import { BiDownvote, BiSolidDownvote, BiSolidReport, BiUpvote } from "react-icons/bi";
-import { BiSolidUpvote } from "react-icons/bi";
 
-// import '../../../../sryle.css'
 import { useQuery } from '@tanstack/react-query';
 import { useForm } from "react-hook-form"
 import Swal from 'sweetalert2';
-import { IoHeart, IoHeartDislike } from 'react-icons/io5';
 import useAuth from '../../../hooks/useAuth';
 import { axiosPublic } from '../../../hooks/useAxiosPublic';
-import SharePost from '../../Home/Posts/components/SharePost';
-import { RiFeedbackFill } from 'react-icons/ri';
 
 
 const AllComment = () => {
