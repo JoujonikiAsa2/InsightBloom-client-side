@@ -142,7 +142,7 @@ const AddPost = () => {
                         {/* post details */}
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Post Description</span>
+                                <span className="label-text">Post Description*</span>
                             </label>
                             <textarea {...register('postDescription', { required: true })} className="textarea textarea-bordered h-24" placeholder="Post Description"></textarea>
                         </div>
@@ -161,6 +161,7 @@ const AddPost = () => {
                                 <option value="gerdening">Gerdening</option>
                             </select>
                         </div>
+                        <p></p>
                         <div className='flex lg:flex-row flex-col gap-3 w-full'>
                             <div className="form-control lg:w-full lg:my-3">
                                 <label className="label">
@@ -185,17 +186,16 @@ const AddPost = () => {
                                     className="input input-bordered  lg:w-full" />
                             </div>
                         </div>
-                        <div className="flex justify-center items-center my-3">
+                        <div className="flex justify-center items-center my-3 gap-8">
                             <button className="btn bg-indigo-500 text-white mb-3" disabled={userDetails.membership == "bronze" && userPost.length >= 5 ? true : false}>
-                                Add Potst
+                                Add Pots
                             </button>
-                            <Link to='/membership'>
-                                <button className={(userDetails.membership == "bronze" && userPost.length >= 5) && 'btn bg-indigo-500 text-white mb-3 hidden'}>
-                                    Become a Member
-                                </button>
+                            <Link to="/membership">
+                                <button className='btn bg-indigo-500 text-white mb-3'>Become a member</button>
                             </Link>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-
+import { BiSolidReport } from 'react-icons/bi'
 import { useQuery } from '@tanstack/react-query';
 import { useForm } from "react-hook-form"
 import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
 import { axiosPublic } from '../../../hooks/useAxiosPublic';
+import ReactEllipsisText from 'react-ellipsis-text';
 
 
 const AllComment = () => {
@@ -192,7 +193,7 @@ const AllComment = () => {
             repoter_email: user.email,
             action: 'not deleted'
         }
-        console.log("Report from my report", {feedback: feedback})
+        console.log("Report from my report", { feedback: feedback })
         axiosPublic.post('/api/reports', feedback)
             .then(res => {
                 console.log(res.data)
@@ -235,10 +236,22 @@ const AllComment = () => {
                                     <tr className=''>
                                         <td className='w-24'>{index + 1}</td>
                                         <td className='w-60'>{comment.email}</td>
-                                        <td className='w-96'>
+                                        <td className='w-96 flex items-center gap-2'>
                                             <div className=''>
-                                                {comment.comment}
+                                                <ReactEllipsisText text={comment.comment} length={"20"} />
                                             </div>
+                                            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                                            <button className="btn btn-sm text-xs" onClick={() => document.getElementById(`${index}`).showModal()}>Read More</button>
+                                            <dialog id={`${index}`} className="modal">
+                                                <div className="modal-box">
+                                                    <form method="dialog">
+                                                        {/* if there is a button in form, it will close the modal */}
+                                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                    </form>
+                                                    <h3 className="font-bold text-lg">Hello!</h3>
+                                                    <p className="py-4">{comment.comment}</p>
+                                                </div>
+                                            </dialog>
                                         </td>
                                         <td className=''>
                                             <select className='input input-bordered pr-2 w-40 h-8 text-gray-400' onChange={(e) => {
@@ -251,7 +264,7 @@ const AllComment = () => {
                                             </select>
                                         </td>
                                         <td>
-                                            <button className='btn btn-sm bg-red-300' onClick={()=>myReport(comment._id, comment.email)} disabled={disabled}><BiSolidReport></BiSolidReport></button>
+                                            <button className='btn btn-sm bg-red-300' onClick={() => myReport(comment._id, comment.email)} disabled={disabled}><BiSolidReport></BiSolidReport></button>
                                         </td>
 
                                     </tr>)
