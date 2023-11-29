@@ -1,12 +1,11 @@
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
-import { redirect } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
-    const axiosPublic = useAxiosPublic
+    const axiosPublic = useAxiosPublic()
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
