@@ -235,14 +235,14 @@ const SignUp = () => {
 
                     {/* Form for the sign up page */}
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-4 pt-8">
                             <div>
                                 <div className="flex gap-2 justify-center items-center">
                                     <IoDocumentTextOutline  ></IoDocumentTextOutline  >
                                     <input
                                         placeholder="Enter your name here....."
                                         name="name"
-                                        {...register("name", { required: true })} className="input input-bordered w-96"
+                                        {...register("name", { required: true })} className="input input-bordered w-72"
                                     />
                                 </div>
                                 <div className="ml-5 text-white pt-2">
@@ -256,7 +256,7 @@ const SignUp = () => {
                                         type="file"
                                         placeholder="Enter your photo URL here....."
                                         name="photo"
-                                        {...register("photo", { required: true })} className="input input-bordered w-96 pt-2" />
+                                        {...register("photo", { required: true })} className="input input-bordered w-72 pt-2" />
                                 </div>
                                 <div className="ml-5 text-white pt-2">
                                     {errors.photo && <span className="text-red-400">This field is required</span>}
@@ -268,7 +268,7 @@ const SignUp = () => {
                                     <input
                                         placeholder="Enter your email here....."
                                         name="email"
-                                        {...register("email", { required: true })} className="input input-bordered w-96" />
+                                        {...register("email", { required: true })} className="input input-bordered w-72" />
                                 </div>
                                 <div className="ml-5 text-white pt-2">
                                     {errors.email && <span className="text-red-400">This field is required</span>}
@@ -276,20 +276,24 @@ const SignUp = () => {
                             </div>
                             <div>
                                 <div className="flex gap-2 justify-center items-center">
-                                    <RiLockPasswordLine ></RiLockPasswordLine>
-                                    <input
-                                        placeholder="Enter your password here....."
-                                        name="password"
-                                        {...register("password", { required: true })} className="input input-bordered w-96"
-                                    />
+                                    <RiLockPasswordLine></RiLockPasswordLine>
+                                    <input type="password" name="password"  {...register("password", {
+                                        required: true,
+                                        minLength: 6,
+                                        maxLength: 20,
+                                        pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{6,20}/
+                                    })} placeholder="password" className="input input-bordered w-72" />
                                 </div>
                                 <div className="ml-5 text-white pt-2">
-                                    {errors.password && <span className="text-red-400">This field is required</span>}
+                                    {errors.password?.type === "required" && <span className='text-xs text-red-600'>Password is required</span>}
+                                    {errors.password?.type === "minLength" && <span className='text-xs text-red-600'>Password should be 6 character or longer</span>}
+                                    {errors.password?.type === "maxLength" && <span className='text-xs text-red-600'>Password should be less then 20 character</span>}
+                                    {errors.password?.type === "pattern" && <span className='text-xs text-red-600'>Minimum six characters, at least one letter, one number and one special character</span>}
                                 </div>
                             </div>
                         </div>
                         <div className="flex justify-center items-center">
-                            <input type="submit" value="Sign In" className="btn my-4 btn-primary  input-bordered w-96 ml-5 text-white" />
+                            <input type="submit" value="Sign In" className="btn my-4 btn-primary  input-bordered w-72 ml-5 text-white" />
                         </div>
                     </form>
                 </div>

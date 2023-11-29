@@ -180,7 +180,7 @@ const Login = () => {
                                     <input
                                         placeholder="Enter your email address..."
                                         name="email"
-                                        {...register("email", { required: true })} className="input input-bordered w-96" />
+                                        {...register("email", { required: true })} className="input input-bordered w-72" />
                                 </div>
                                 <div>
                                     {errors.email && <span className="text-red-400 pt-2">This field is required</span>}
@@ -193,7 +193,8 @@ const Login = () => {
                                     <input
                                         placeholder="Enter your password...."
                                         name="password"
-                                        {...register("password", { required: true })} className="input input-bordered w-96"
+                                        type="password"
+                                        {...register("password", { required: true })} className="input input-bordered w-72"
                                     />
                                 </div>
                                 <div>
@@ -202,7 +203,7 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="flex justify-center items-center">
-                            <input type="submit" value="Sign Up" className="btn my-4 btn-primary  input-bordered w-96 ml-5 text-white" />
+                            <input type="submit" value="Sign Up" className="btn my-4 btn-primary  input-bordered w-72 ml-5 text-white" />
                         </div>
                     </form>
                 </div>
