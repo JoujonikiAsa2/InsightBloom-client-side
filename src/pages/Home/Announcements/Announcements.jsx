@@ -1,19 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../../sharedComponents/SectionTitle/SectionTitle";
 import { axiosPublic } from "../../../hooks/useAxiosPublic";
+import useAnnouncement from "../../../hooks/useAnnouncement";
+import useAnnouncementCount from "../../../hooks/useAnnouncementCount";
 
 const Announcements = () => {
 
-    const { refech, data: announcements = [] } = useQuery({
-        queryKey: 'announcements',
-        queryFn: async () => {
-            const res = await axiosPublic.get('/api/announcement')
-            return res.data
-        }
-    })
+    const [announcements,refetch] = useAnnouncement()
+    const [totalAnnouncements] = useAnnouncementCount()
 
     console.log("Announcement", announcements)
-    const length = announcements.length
+    const length = totalAnnouncements.totalAnnouncement
     return (
         <>
             {
