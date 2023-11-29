@@ -19,7 +19,7 @@ const Home = () => {
             </Helmet>
             <div>
                 <Banner handleSearch={handleSearch}></Banner>
-                <Tag></Tag>
+                <Tag handleSearch={handleSearch}></Tag>
                 <Announcements></Announcements>
                 <Posts searchValue = {valueS}></Posts>
             </div>
