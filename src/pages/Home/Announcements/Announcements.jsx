@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../../sharedComponents/SectionTitle/SectionTitle";
-import { axiosPublic } from "../../../hooks/useAxiosPublic";
 import useAnnouncement from "../../../hooks/useAnnouncement";
 import useAnnouncementCount from "../../../hooks/useAnnouncementCount";
+import EllipsisText from "react-ellipsis-text";
 
 const Announcements = () => {
 
-    const [announcements,refetch] = useAnnouncement()
+    const [announcements, refetch] = useAnnouncement()
     const [totalAnnouncements] = useAnnouncementCount()
+
 
     console.log("Announcement", announcements)
     const length = totalAnnouncements.totalAnnouncement
@@ -35,7 +35,7 @@ const Announcements = () => {
                                     {
                                         announcements.map((announcement, index) => <tr key={index}>
                                             <td className="avatar">
-                                                <div className="w-16 rounded-full border-2 border-purple-500">
+                                                <div className="lg:w-16 w-10 rounded-full border-2 border-purple-500">
                                                     <img src={announcement.authorImage} alt="Tailwind-CSS-Avatar-component" />
                                                 </div>
                                             </td>
@@ -47,14 +47,46 @@ const Announcements = () => {
                                                 </div>
                                             </td>
                                             <td>
-                                                <div>
+                                                <div className="lg:flex hidden">
                                                     <p>
-                                                    {announcement.postTitle}
+                                                        {announcement.postTitle}
                                                     </p>
                                                 </div>
+                                                <div className=''>
+                                                    <EllipsisText text={announcement.postTitle} length={"5"} />
+                                                </div>
+                                                {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                                                <button className="btn btn-xs text-xs" onClick={() => document.getElementById(`${index}`).showModal()}>More</button>
+                                                <dialog id={`${index}`} className="modal">
+                                                    <div className="modal-box">
+                                                        <form method="dialog">
+                                                            {/* if there is a button in form, it will close the modal */}
+                                                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                        </form>
+                                                        <h3 className="font-bold text-lg"></h3>
+                                                        <p className="py-4">{announcement.postTitle}</p>
+                                                    </div>
+                                                </dialog>
                                             </td>
-                                            <td>
+                                            <td className="lg:flex hidden">
                                                 <p>{announcement.postDescription}</p>
+                                            </td>
+                                            <td className="lg:hidden flex flex-col gap-2">
+                                                <div className=''>
+                                                    <EllipsisText text={announcement.postDescription} length={"20"} />
+                                                </div>
+                                                {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                                                <button className="btn btn-xs text-xs" onClick={() => document.getElementById(`${index}`).showModal()}>More</button>
+                                                <dialog id={`${index}`} className="modal">
+                                                    <div className="modal-box">
+                                                        <form method="dialog">
+                                                            {/* if there is a button in form, it will close the modal */}
+                                                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                        </form>
+                                                        <h3 className="font-bold text-lg">Hello!</h3>
+                                                        <p className="py-4">{announcement.postDescription}</p>
+                                                    </div>
+                                                </dialog>
                                             </td>
                                         </tr>)
                                     }
