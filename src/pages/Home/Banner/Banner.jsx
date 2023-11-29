@@ -33,10 +33,10 @@ const Banner = ({ handleSearch }) => {
                         <div className="join">
                             <div>
                                 <div>
-                                    <input className="input input-bordered join-item w-48" placeholder="Search" name="search" />
+                                    <input className="input input-bordered join-item w-48 text-black" placeholder="Search" name="search" />
                                 </div>
                             </div>
-                            <input type="submit" value="Search" className="btn join-item bg-indigo-500  text-white" />
+                            <input type="submit" value="Search" className="btn join-item bg-indigo-500  " />
                         </div>
                     </form>
                 </div>
