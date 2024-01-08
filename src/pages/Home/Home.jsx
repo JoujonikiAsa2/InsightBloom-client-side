@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet";
 import Banner from "./Banner/Banner";
 import Tag from "./Tag/Tag";
-import Announcements from "./Announcements/Announcements";
 import Posts from "./Posts/Posts";
 import { useState } from "react";
 const Home = () => {
@@ -18,10 +17,13 @@ const Home = () => {
                 <title>InsightBloom | Home</title>
             </Helmet>
             <Banner handleSearch={handleSearch}></Banner>
-            <div className="mx-[4vw]">
-                <Tag handleSearch={handleSearch}></Tag>
-                <Announcements></Announcements>
-                <Posts searchValue={valueS}></Posts>
+            <div className="flex gap-4 mb-12">
+                <div className="w-48">
+                    <Tag handleSearch={handleSearch}></Tag>
+                </div>
+                <div  className="flex-1">
+                    <Posts searchValue={valueS}></Posts>
+                </div>
             </div>
         </>
     );

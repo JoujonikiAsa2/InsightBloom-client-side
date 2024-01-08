@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
 import { axiosPublic } from "../../../hooks/useAxiosPublic";
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
 import './style.css';
 
-import SectionTitle from "../../../sharedComponents/SectionTitle/SectionTitle";
 
-const Tag = ({handleSearch}) => {
+const Tag = ({ handleSearch }) => {
 
     const [tags, setTags] = useState([])
+    const [activeTag, setActiveTag] = useState(null);
 
     const swiperParams = {
         spaceBetween: 20,
@@ -46,26 +39,24 @@ const Tag = ({handleSearch}) => {
             .catch(error => console.log(error.message))
     }, [])
 
-    const handleTagSearch = (tag) =>{
+    const handleTagSearch = (tag) => {
+        setActiveTag(tag);
         handleSearch(tag)
     }
     return (
-        <div>
-            <SectionTitle heading="Tags" details="You can search post using those tag by clicking on tag."></SectionTitle>
-            <Swiper
-                {...swiperParams}
-                modules={[Pagination]}
-                className="mySwiper"
-                data-aos="fade-right" data-aos-anchor-placement="center-center"
-            >
-
+        <div className="flex flex-col gap-2 justify-start bg-white rounded p-4">
+            <div className="bg-gray-400 p-2 rounded">
+                <h2 className="text-xs font-bold">All Tags</h2>
+            </div>
+            <div className="bg-gray-200 rounded p-2 flex flex-col gap-2 justify-start">
                 {
                     tags.map(tag =>
-                        <SwiperSlide className="card shadow-lg shadow-slate-600 rounded lg:w-56 h-28 my-8 flex justify-center items-center hover:cursor-pointer" onClick={()=>handleTagSearch(tag)}>
-                            <h2 className="text-xs lg:text-lg font-bold p-4 text-purple-700 capitalize">{tag}</h2>
-                        </SwiperSlide>
+                        <div className="mytag">
+                            <a className={`mytag ${activeTag === tag ? 'active-tag' : 'capitalize text-xs'}`} onClick={() => handleTagSearch(tag)}>{tag}
+                            </a>
+                        </div>
                     )}
-            </Swiper>
+            </div>
         </div>
     );
 };

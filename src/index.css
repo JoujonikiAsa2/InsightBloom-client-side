@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    background: #FFFFFF;
+}
 .emoji{
     font-family: 'Noto Emoji', sans-serif;
 }

@@ -6,7 +6,6 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { signOut } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
-import useAnnouncement from "../../hooks/useAnnouncement";
 import useAnnouncementCount from "../../hooks/useAnnouncementCount";
 
 const Navbar = () => {
