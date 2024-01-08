@@ -17,11 +17,11 @@ const Home = () => {
                 <title>InsightBloom | Home</title>
             </Helmet>
             <Banner handleSearch={handleSearch}></Banner>
-            <div className="flex gap-4 mb-12">
-                <div className="w-48">
+            <div className="flex md:flex-row flex-col lg:flex-row gap-4 my-12 justify-center mx-[4vw]">
+                <div className="lg:w-[20vw] md:w-48 w-full ">
                     <Tag handleSearch={handleSearch}></Tag>
                 </div>
-                <div  className="flex-1">
+                <div  className="">
                     <Posts searchValue={valueS}></Posts>
                 </div>
             </div>

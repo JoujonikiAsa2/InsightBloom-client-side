@@ -1,10 +1,17 @@
-.pagination{
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.pagination {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divshadow {
+  box-shadow: 2px 0px 2px 2px #31304D;
+}
 
 .pagination .selected {
-    background-color: #5c86da;
-  }
+  color: #FFFFFF;
+  background: #31304D;
+  margin-left: 16px;
+  box-shadow: 1px 1px 1px 1px black;
+}

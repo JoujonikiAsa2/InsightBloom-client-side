@@ -23,7 +23,7 @@ const Banner = ({ handleSearch }) => {
     }
     return (
         <>
-            <div className="hero bg-[#161A30]  max-w-[2350px] h-[600px] z-0 relative" style={{
+            <div className="hero bg-[#161A30]  max-w-[2350px] lg:h-[100vh] md:h-[100vh] h-[400px] z-0 relative" style={{
                 backgroundImage: `url(${banner})`,
                 objectFit: "fit",
                 opacity: "50%",
@@ -34,15 +34,14 @@ const Banner = ({ handleSearch }) => {
             }} >
 
             </div >
-            <div className="hero-content flex-col lg:flex-row absolute top-[30%] md:top-[25%] lg:top-[25%] bottom-[15%] w-auto left-[5%]  right-[5%] md:left-[5%]  md:right-[5%]  2xl:left-[25%]  2xl:right-[25%]  bg-[#31304D] ">
+            <div className="hero-content flex-col lg:flex-row absolute top-[5%] lg:bottom-0 md:bottom-0 bottom-[50%] w-auto left-[5%]  right-[5%] md:left-[5%]  md:right-[5%]  2xl:left-[25%]  2xl:right-[25%] ">
                 <div className="text-[#FFFFFF] p-8" data-aos="fade-left">
-                    <h1 className="text-[1.6rem] font-bold">Welcome to our forum <span>InsightBloom</span></h1>
-                    <p className="py-3">Search here your fevorite post tag!</p>
+                    <p className="py-3 text-black">Search here your fevorite post tag!</p>
                     <form onSubmit={handleSearchLocal}>
                         <div className="join">
                             <div>
                                 <div>
-                                    <input className="input input-bordered join-item w-32 md:w-48 lg:w-48 text-black" placeholder="Search" name="search" />
+                                    <input className="input input-bordered join-item w-[60vw] md:w-80 lg:w-96 text-black" placeholder="Search" name="search" />
                                 </div>
                             </div>
                             <input type="submit" value="Search" className="btn join-item bg-indigo-500  " />

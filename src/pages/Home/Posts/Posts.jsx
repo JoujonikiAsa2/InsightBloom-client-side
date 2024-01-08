@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import SectionTitle from '../../../sharedComponents/SectionTitle/SectionTitle';
 import Post from './components/Post';
 import './style.css'
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
@@ -72,9 +71,6 @@ const Posts = ({ searchValue }) => {
             setActiveBg("blue-500")
         }
     }
-    // console.log("Active bg", activeBg)
-    // console.log("You clicked on page", currentPage)
-
     // filtered data by popularity
     const handlePopularButton = () => {
         // setUrl('')
@@ -86,36 +82,45 @@ const Posts = ({ searchValue }) => {
 
     return (
         <div className='bg-white px-8 py-4 rounded-xl'>
-            <SectionTitle heading="Posts of our forum" details=" This section serves as a centralized hub for accessing a diverse range of discussions and information within our forum community. Here, users can explore and engage with a variety of posts covering different topics and categories"></SectionTitle>
 
-            <div className='flex justify-center mb-8'>
-                <button className='btn bg-indigo-400 text-white' onClick={handlePopularButton}>Sort by Popularity</button>
+            <div className='mb-4'>
+                <button className='btn btn-sm bg-[#31304D] text-white' onClick={handlePopularButton}>Sort by Popularity</button>
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center justify-items-center gap-12'>
+            <div className='grid grid-cols-1 gap-4'>
                 {
-                    posts.map((post, index) => <Post key={post._id} post={post} index={index}></Post>)
+                    posts.length > 0 ? <>
+                        {
+                            posts.map((post, index) => <Post key={post._id} post={post} index={index}></Post>)
+                        }
+                    </>
+                        :
+                        <h2 className='w-[80vw] text-center font-bold text-2xl'>No match post</h2>
                 }
             </div>
             <div className='my-6 col-span-3 flex justify-center items-center gap-2'>
-                <div className="pagination">
-                    <div className='mr-2 lg:mr-0 md:mr-0'>
-                        <button className="btn border-[1px] border-gray-400" onClick={handlePreviousPage}>
-                            <FaArrowLeft />
-                        </button></div>
-                    <div className='hidden lg:flex md:flex justify-center items-center'>
-                        {
-                            pages.map(page => <button className={currentPage === page ? "btn btn-circle selected text-white" : 'btn btn-circle border-[1px] border-gray-400 m-[5px]'} key={page} onClick={() => {
-                                setCurrentPage(page)
-                                refetch()
-                            }}>{page}</button>)
-                        }
-                    </div>
-                    <div>
-                        <button className="btn border-[1px] border-gray-400" onClick={handleNextPage}><FaArrowRight></FaArrowRight></button>
-                    </div>
+                {
+                    posts.length > 0 ?
+                        <div className="pagination">
+                            <div className='mr-2 lg:mr-0 md:mr-0'>
+                                <button className="" onClick={handlePreviousPage}>
+                                    <FaArrowLeft />
+                                </button></div>
+                            <div className='hidden lg:flex md:flex justify-center items-center'>
+                                {
+                                    pages.map(page => <button className={currentPage === page ? "btn btn-circle selected text-white" : 'btn btn-circle border-[1px] shadow-sm ml-3'} key={page} onClick={() => {
+                                        setCurrentPage(page)
+                                        refetch()
+                                    }}>{page}</button>)
+                                }
+                            </div>
+                            <div>
+                                <button className="ml-4" onClick={handleNextPage}><FaArrowRight></FaArrowRight></button>
+                            </div>
 
-                </div>
+                        </div>
+                        : ""
+                }
             </div>
         </div >
     );

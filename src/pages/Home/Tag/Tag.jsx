@@ -44,11 +44,11 @@ const Tag = ({ handleSearch }) => {
         handleSearch(tag)
     }
     return (
-        <div className="flex flex-col gap-2 justify-start bg-white rounded p-4">
+        <div className="flex flex-col gap-2 justify-start bg-white  rounded-lg p-4">
             <div className="bg-gray-400 p-2 rounded">
                 <h2 className="text-xs font-bold">All Tags</h2>
             </div>
-            <div className="bg-gray-200 rounded p-2 flex flex-col gap-2 justify-start">
+            <div className="hover:cursor-pointer bg-gray-200 rounded p-2 flex flex-col gap-2 justify-start">
                 {
                     tags.map(tag =>
                         <div className="mytag">
