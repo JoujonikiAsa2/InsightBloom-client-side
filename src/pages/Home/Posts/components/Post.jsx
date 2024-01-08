@@ -2,11 +2,22 @@ import React from 'react';
 import { IoArrowDown, IoArrowUp } from 'react-icons/io5';
 import { FaComments } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import useAuth from '../../../../hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
 
 const Post = ({ post, index }) => {
 
     console.log(index)
 
+    // fetching comment by email
+    const { refetch: refetchComment, data: commentPerPost=[] } = useQuery({
+        queryKey: ['commentPerPost', post._id],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/api/comments/post/${post._id}`)
+            return res.data
+        }
+    })
+    console.log(commentPerPost)
 
     return (
         <Link to={`/postDetails/${post._id}`}>
@@ -22,7 +33,7 @@ const Post = ({ post, index }) => {
                     <p> {post.time}</p>
                 </div>
                 <div className='flex justify-between items-center'>
-                    <h5 className='flex gap-2 justify-center items-center text-lg'> <FaComments ></FaComments> {post.comments}</h5>
+                    <h5 className='flex gap-2 justify-center items-center text-lg'> <FaComments ></FaComments> {commentPerPost.length}</h5>
                     <h5 className='flex gap-2 justify-center items-center text-lg'><IoArrowUp></IoArrowUp> {post.upVote}</h5>
                     <h5 className='flex gap-2 justify-center items-center text-lg'><IoArrowDown></IoArrowDown> {post.downVote}</h5>
                 </div>

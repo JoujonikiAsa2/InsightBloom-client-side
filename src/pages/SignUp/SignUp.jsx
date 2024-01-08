@@ -59,7 +59,7 @@ const SignUp = () => {
                         membership: "Bronze"
                     }
 
-                    axiosPublic.post('/users', userInfo)
+                    axiosPublic.post('/api/users', userInfo)
                         .then(res => {
                             if (res.data.insertedId) {
                                 console.log("user added to the database")
@@ -115,7 +115,7 @@ const SignUp = () => {
                     membership: "Bronze"
                 }
 
-                axiosPublic.post('/users', userInfo)
+                axiosPublic.post('/api/users', userInfo)
                     .then(res => {
                         if (res.data.insertedId) {
                             console.log("user added to the database")

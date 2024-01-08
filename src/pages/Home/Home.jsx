@@ -8,7 +8,7 @@ const Home = () => {
 
     const [valueS, setValueS] = useState(null)
 
-    const handleSearch = (value) =>{
+    const handleSearch = (value) => {
         setValueS(value)
     }
     console.log("Home", valueS)
@@ -17,11 +17,11 @@ const Home = () => {
             <Helmet>
                 <title>InsightBloom | Home</title>
             </Helmet>
-            <div>
-                <Banner handleSearch={handleSearch}></Banner>
+            <Banner handleSearch={handleSearch}></Banner>
+            <div className="mx-[4vw]">
                 <Tag handleSearch={handleSearch}></Tag>
                 <Announcements></Announcements>
-                <Posts searchValue = {valueS}></Posts>
+                <Posts searchValue={valueS}></Posts>
             </div>
         </>
     );

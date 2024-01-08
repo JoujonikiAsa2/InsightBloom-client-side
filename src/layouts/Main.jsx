@@ -12,9 +12,9 @@ const Main = () => {
     //     });
     // }, [])
     return (
-        <div className="max-w-[2200px] merriweather bg-[#ebf0ec]">
+        <div className="max-w-[2350px] merriweather bg-[#ebf0ec]">
             <Navbar></Navbar>
-            <div className="mx-[4vw]">
+            <div className="">
                 <Outlet></Outlet>
             </div>
             <Footer></Footer>
